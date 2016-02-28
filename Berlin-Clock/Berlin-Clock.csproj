@@ -47,4 +47,7 @@
   <ItemGroup>
     <Folder Include="TimeFormatCreators\" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="README.txt" />
+  </ItemGroup>
 </Project>

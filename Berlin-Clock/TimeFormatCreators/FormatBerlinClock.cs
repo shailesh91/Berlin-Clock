@@ -15,23 +15,25 @@ namespace BerlinClock
 			throw new ApplicationException(string.Format("Input Time Format not Supported Yet!"));
 		}
 
-		//Accepts Time Object to Output Berlin Clock Format String
+		//Accepts Time Object to Output Berlin Clock Format String - L to R
 		public String GetOutput(Time time){
 			return getSeconds (time.getSeconds ()) + " " + getHours (time.getHours ()) + " " + getMinutes (time.getMinutes ());
 		}
 
-
+		//Converts Hours - Second and Third Rows
 		private String getHours(int hours)
 		{
-			return getOnOff(4, (hours - (hours % 5)) / 5) + " " + getOnOff(4, hours % 5);
+			return getLampState(4, (hours - (hours % 5)) / 5) + " " + getLampState(4, hours % 5);
 		}
 
+		//Converts Minutes - Bottom Two Rows
 		private String getMinutes(int minutes) 
 		{
-			return Regex.Replace(getOnOff(11, (minutes - (minutes % 5)) / 5, color1),color1+color1+color1,color1+color1+color2) + " " +
-				getOnOff(4, minutes % 5, color1);
+			return Regex.Replace(getLampState(11, (minutes - (minutes % 5)) / 5, color1),color1+color1+color1,color1+color1+color2) + " " +
+				getLampState(4, minutes % 5, color1);
 		}
 
+		//Converts Seconds - Top Row
 		private String getSeconds(int seconds) 
 		{
 			if (seconds % 2 == 0) 
@@ -40,19 +42,21 @@ namespace BerlinClock
 				return colorOff;
 		}
 
-		private String getOnOff(int lamps, int onSigns) 
+		//Checks Whether the Lamp is On/Off
+		private String getLampState(int lamps, int onLight) 
 		{
-			return getOnOff(lamps, onSigns, color2);
+			return getLampState(lamps, onLight, color2);
 		}
 
-		private String getOnOff(int lamps, int onSigns, String onSign) 
+		//Checks Whether the Lamp is On/Off
+		private String getLampState(int lamps, int onSigns, String onLight) 
 		{
 			String output = "";
 			for (int i = 0; i < onSigns; i++) 
 			{
-				output += onSign;
+				output += onLight;
 			}
-			for (int i = 0; i < (lamps - onSigns); i++) 
+			for (int i = 0; i < (lamps - onLight); i++) 
 			{
 				output += colorOff;
 			}
