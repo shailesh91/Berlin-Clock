@@ -49,14 +49,14 @@ namespace BerlinClock
 		}
 
 		//Checks Whether the Lamp is On/Off
-		private String getLampState(int lamps, int onSigns, String onLight) 
+		private String getLampState(int lamps, int onLights, String onLight) 
 		{
 			String output = "";
-			for (int i = 0; i < onSigns; i++) 
+			for (int i = 0; i < onLights; i++) 
 			{
 				output += onLight;
 			}
-			for (int i = 0; i < (lamps - onLight); i++) 
+			for (int i = 0; i < (lamps - onLights); i++) 
 			{
 				output += colorOff;
 			}
